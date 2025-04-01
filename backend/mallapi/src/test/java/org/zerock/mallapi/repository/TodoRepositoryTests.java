@@ -3,6 +3,7 @@ package org.zerock.mallapi.repository;
 //import static org.mockito.ArgumentMatchers.isNull;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,4 +33,25 @@ public class TodoRepositoryTests {
         }
 
     }
+
+    @Test
+    public void testRead(){
+        Long tno = 33L;
+        java.util.Optional<Todo> result = todoRepository.findById(tno);
+        Todo todo = result.orElseThrow();
+        log.info(todo);
+    }
+
+    @Test
+    public void testModify(){
+        Long tno = 22L;
+        Optional<Todo> result = todoRepository.findById(tno);
+        Todo todo = result.orElseThrow(()-> new RuntimeException("해당 Id의 Todo가 존재하지 않습니다."));
+        todo.changeTitle("Modified 33 ...");
+        todo.changeComplete(true);
+        todo.changeDueDate(LocalDate.of(2023,10,10));
+
+        todoRepository.save(todo);
+    }
+
 }
