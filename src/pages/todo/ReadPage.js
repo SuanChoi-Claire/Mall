@@ -5,6 +5,7 @@ import {
   useParams,
   useSearchParams,
 } from "react-router-dom";
+import ReadComponent from "./ReadComponent";
 
 const ReadPage = () => {
   const { tno } = useParams();
@@ -30,12 +31,9 @@ const ReadPage = () => {
   }, [page, size]);
 
   return (
-    <div className="text-3xl font-extrabold">
-      Todo Read Page Component{tno}
-      <div>
-        <button onClick={() => moveToModify(33)}>Test modify</button>
-        <button onClick={() => moveToList()}>List Test</button>
-      </div>
+    <div className="font-extrabold w-full bg-white mt-6">
+      <div className="text-2xl">Todo Read Page Component {tno}</div>
+      <ReadComponent tno={tno}></ReadComponent>
     </div>
   );
 };
