@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { postAdd } from "../../api/todoApi";
 
 const initState = {
   title: "",
@@ -13,7 +14,15 @@ const AddComponent = () => {
     setTodo({ ...todo });
   };
   const handleClickAdd = () => {
-    console.log(todo);
+    //console.log(todo);
+    postAdd(todo)
+      .then((result) => {
+        console.log("**********", result);
+        setTodo({ ...initState });
+      })
+      .catch((e) => {
+        console.error(e);
+      });
   };
   return (
     <div className="border-2 border-sky-200 mt-10 m-2 p-4">
