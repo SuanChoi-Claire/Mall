@@ -1,5 +1,7 @@
 const AddPage = () => {
-  return <div className="text-3xl font-extrabold">Todo Add Page</div>;
+  return (
+  <div></div>
+  <div className="text-3xl font-extrabold">Todo Add Page</div>;
 };
 
 export default AddPage;

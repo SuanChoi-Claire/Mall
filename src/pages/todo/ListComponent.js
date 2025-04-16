@@ -17,7 +17,7 @@ const initState = {
 };
 
 const ListComponent = () => {
-  const { page, size, moveToList } = useCustomMove();
+  const { page, size, moveToList, moveToRead, refresh } = useCustomMove();
 
   const [serverData, setServerData] = useState(initState);
 
@@ -26,7 +26,7 @@ const ListComponent = () => {
       console.log(data);
       setServerData(data);
     });
-  }, [page, size]);
+  }, [page, size, refresh]);
 
   return (
     <div>
@@ -37,6 +37,7 @@ const ListComponent = () => {
             <div
               key={todo.tno}
               className="w-full min-w-[400px] p-2 m-2 rounded shadow-md"
+              onClick={() => moveToRead(todo.tno)}
             >
               <div className="flex">
                 <div className="font-extrabold text-1xl p-2 w-1/12">

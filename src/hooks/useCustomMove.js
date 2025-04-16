@@ -35,7 +35,7 @@ const useCustomMove = () => {
       queryStr = queryDefault;
     }
     setRefresh(!refresh);
-    //navigate({ pathname: `../list`, search: queryStr });
+    navigate({ pathname: `../list`, search: queryStr });
   };
 
   const moveToModify = (num) => {
@@ -47,7 +47,15 @@ const useCustomMove = () => {
     });
   };
 
-  return { moveToList, moveToModify, page, size };
+  const moveToRead = (num) => {
+    console.log(queryDefault);
+    navigate({
+      pathname: `../read/${num}`,
+      search: queryDefault,
+    });
+  };
+
+  return { moveToList, moveToModify, moveToRead, page, size, refresh };
 };
 
 export default useCustomMove;
