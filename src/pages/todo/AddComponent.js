@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { postAdd } from "../../api/todoApi";
+import ResultModal from "../../components/common/ResultModal";
 
 const initState = {
   title: "",
@@ -9,15 +10,19 @@ const initState = {
 
 const AddComponent = () => {
   const [todo, setTodo] = useState({ ...initState });
+  const [result, setResult] = useState(null);
+
   const handleChangeTodo = (e) => {
     todo[e.target.name] = e.target.value;
     setTodo({ ...todo });
   };
+
   const handleClickAdd = () => {
     //console.log(todo);
     postAdd(todo)
       .then((result) => {
-        console.log("**********", result);
+        setResult(result.TNO);
+        //console.log("**********", result);
         setTodo({ ...initState });
       })
       .catch((e) => {
