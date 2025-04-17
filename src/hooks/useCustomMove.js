@@ -36,6 +36,7 @@ const useCustomMove = () => {
     }
     setRefresh(!refresh);
     navigate({ pathname: `../list`, search: queryStr });
+    //여기가 URL 만드는곳
   };
 
   const moveToModify = (num) => {
