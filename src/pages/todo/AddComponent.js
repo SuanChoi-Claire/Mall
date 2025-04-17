@@ -29,8 +29,23 @@ const AddComponent = () => {
         console.error(e);
       });
   };
+
+  const closeModal = () => {
+    setResult(null);
+  };
+
   return (
     <div className="border-2 border-sky-200 mt-10 m-2 p-4">
+      {result ? (
+        <ResultModal
+          title={"add Result"}
+          content={`New ${result}Added`}
+          callbackFn={closeModal}
+        />
+      ) : (
+        <></>
+      )}
+
       <div className="flex justify-center">
         <div className="relative mb-4 flex w-full flex-wrap items-stretch">
           <div className="w-1/5 p-6 text-right font-bold">TITLE</div>
