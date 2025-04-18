@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { getOne, deleteOne, putOne } from "../../api/todoApi";
+import useCustomMove from "../../hooks/useCustomMove";
+import ResultModal from "../../components/common/ResultModal";
 
 const initState = {
   tno: 0,
@@ -13,20 +15,32 @@ const ModifyComponent = ({ tno, movelist, moveRead }) => {
   const [todo, setTodo] = useState({ ...initState });
   const [result, setresult] = useState(null);
 
+  const { moveToList, moveToRead } = useCustomMove();
+
   useEffect(() => {
     getOne(tno).then((data) => setTodo(data));
   }, [tno]);
 
   const handleClickModify = () => {
     putOne(todo).then((data) => {
-      console.log("modify result :" + data);
+      //console.log("modify result :" + data);
+      setresult("Modified");
     });
   };
 
   const handleClickDelete = () => {
     deleteOne(tno).then((data) => {
-      console.log("delete result :" + data);
+      //console.log("delete result :" + data);
+      setresult("Deleted");
     });
+  };
+
+  const closeModal = () => {
+    if (result === "Deleted") {
+      moveToList();
+    } else {
+      moveToRead(tno);
+    }
   };
 
   const handleChangeTodo = (e) => {
@@ -45,6 +59,16 @@ const ModifyComponent = ({ tno, movelist, moveRead }) => {
 
   return (
     <div className="border-2 border-sky-200 mt-10 m-2 p-4">
+      {result ? (
+        <ResultModal
+          title={"처리결과"}
+          content={result}
+          callbackFn={closeModal}
+        ></ResultModal>
+      ) : (
+        <></>
+      )}
+
       <div className="flex justify-center mt-10">
         <div className="relative mb-4 flex w-full flex-wrap items-stretch">
           <div className="w-1/5 p-6 text-right font-bold">TNO</div>
